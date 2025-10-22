@@ -142,3 +142,21 @@ def run_bot():
 if __name__ == "__main__":
     threading.Thread(target=run_bot, daemon=True).start()
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+import os
+import requests
+
+def send_vip_invite(user_id):
+    group_id = os.getenv("TELEGRAM_GROUP_ID")
+    bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+    
+    # Gerar link de convite do grupo
+    invite_url = f"https://api.telegram.org/bot{bot_token}/exportChatInviteLink?chat_id={group_id}"
+    response = requests.get(invite_url).json()
+    invite_link = response.get("result")
+
+    if invite_link:
+        message = f"✅ Pagamento confirmado! Aqui está seu link do grupo VIP:\n\n{invite_link}"
+        requests.get(f"https://api.telegram.org/bot{bot_token}/sendMessage", params={
+            "chat_id": user_id,
+            "text": message
+        })
