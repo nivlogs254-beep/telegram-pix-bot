@@ -12,12 +12,12 @@ comprovantes = {}
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        "👋 Olá! Eu sou o bot de vendas. Digite /comprar para adquirir o e-book."
+        "👋 Olá! ta vindo aqui comprar coisas ne 😏. Digite /comprar para adquirir o e-book."
     )
 
 async def comprar(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
-        f"💰 Para comprar o e-book, envie o valor via PIX usando o link abaixo:\n\n{LINK_PIX}\n\n"
+        f"💰 Para comprar o conteúdo, envie o valor via PIX usando o link abaixo:\n\n{LINK_PIX}\n\n"
         "Depois, envie o comprovante aqui como foto 📸 ou PDF 📄."
     )
 
@@ -25,7 +25,7 @@ async def receber_comprovante(update: Update, context: ContextTypes.DEFAULT_TYPE
     user = update.message.from_user
     comprovantes[user.id] = True
     await update.message.reply_text(
-        "✅ Comprovante recebido! Aguarde um momento para aprovação manual."
+        "✅ Comprovante recebido! Aguarde um momento para aprovação."
     )
 
 async def aprovar(update: Update, context: ContextTypes.DEFAULT_TYPE):
